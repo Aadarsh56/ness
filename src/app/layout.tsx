@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { BagDrawer } from '@/components/BagDrawer'
 import { StoreProvider } from '@/components/StoreProvider'
+import { ALLOW_INDEXING, SITE_URL as SITE } from '@/lib/site'
 
 /**
  * Type pairing chosen against the supplied lockup: a high-contrast Didone
@@ -25,8 +26,6 @@ const jost = Jost({
   variable: '--font-jost',
   display: 'swap',
 })
-
-const SITE = 'https://nesshouseofscents.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -70,7 +69,15 @@ export const metadata: Metadata = {
     images: ['/brand/og-default.png'],
   },
   alternates: { canonical: '/' },
-  robots: { index: true, follow: true },
+  // Private preview by default — see src/lib/site.ts
+  robots: ALLOW_INDEXING
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: { index: false, follow: false },
+      },
 }
 
 export const viewport: Viewport = {

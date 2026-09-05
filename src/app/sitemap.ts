@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { LIVE_FORMATS, PRODUCTS } from '@/data/products'
-
-const SITE = 'https://nesshouseofscents.com'
+import { SITE_URL as SITE } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()

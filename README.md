@@ -163,12 +163,21 @@ An unknown or not-yet-live `format` falls back to the full collection.
 - **Store:** `StoreProvider` holds bag + wishlist in `localStorage`, guarded so
   blocked storage degrades to in-memory rather than throwing.
 
+### Search indexing
+
+The site ships **blocked from search engines**, because the catalogue is
+placeholder data. Three layers enforce it: `robots.txt`, the `robots` meta tag,
+and an `X-Robots-Tag` response header (which also covers images and
+`sitemap.xml`).
+
+To go public, set `ALLOW_INDEXING=true` in the environment and redeploy. The
+flag lives in `src/lib/site.ts`, which is also the single source for `SITE_URL`.
+
 ### Before going live
 
 1. Real fragrance names, notes and prices in `src/data/products.ts`.
 2. Product photography, replacing `<Flacon>`.
-3. The real domain — `nesshouseofscents.com` is a placeholder. It appears in
-   `src/app/layout.tsx`, `sitemap.ts` and `robots.ts`.
+3. `ALLOW_INDEXING=true`, once the catalogue is real.
 4. Shipping, returns, contact and testing policy copy — each currently marked
    as unresolved rather than invented.
 5. A commerce backend. Checkout is deliberately disabled, not stubbed.

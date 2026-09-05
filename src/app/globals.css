@@ -1,0 +1,311 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   NESS ATELIER — design tokens
+   Palette sampled directly from the brand sheet swatch bar
+   (brand-assets/1.png, 13.png). Do not introduce new hues.
+   ============================================================ */
+
+@theme {
+  --color-ink: #000000;
+  --color-espresso: #330a0a;
+  --color-burgundy: #5a0a0a;
+  --color-rosewood: #5b3a3a;
+  --color-ivory: #fffbec;
+  --color-paper: #ffffff;
+
+  /* Derived tints — same hues, lightened. No new colours. */
+  --color-ivory-deep: #f6efdc;
+  --color-rosewood-mist: #efe6e2;
+
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', 'Didot',
+    'Times New Roman', serif;
+  --font-sans: var(--font-jost), 'Jost', -apple-system, 'Segoe UI', sans-serif;
+
+  --tracking-couture: 0.34em;
+  --tracking-eyebrow: 0.22em;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --rule: color-mix(in srgb, var(--color-espresso) 16%, transparent);
+    --rule-soft: color-mix(in srgb, var(--color-espresso) 9%, transparent);
+    --rule-inverse: color-mix(in srgb, var(--color-ivory) 22%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-burgundy);
+    color: var(--color-ivory);
+  }
+
+  /* Focus ring — visible, on-brand, never removed. */
+  :focus-visible {
+    outline: 1px solid var(--color-burgundy);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.005em;
+  }
+}
+
+@layer components {
+  /* --- Editorial rhythm ------------------------------------ */
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 96rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 3rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .shell {
+      padding-inline: 5rem;
+    }
+  }
+
+  .shell-narrow {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 46rem;
+    padding-inline: 1.5rem;
+  }
+
+  /* --- Eyebrow / couture caps ------------------------------ */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  @media (min-width: 768px) {
+    .eyebrow {
+      font-size: 0.6875rem;
+    }
+  }
+
+  /* --- Display sizes --------------------------------------- */
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(3.25rem, 11vw, 9.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .display-lg {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+  .display-md {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.875rem, 3.6vw, 3rem);
+    line-height: 1.08;
+  }
+  .display-sm {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+    line-height: 1.15;
+  }
+
+  .lede {
+    font-size: 1rem;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+  @media (min-width: 768px) {
+    .lede {
+      font-size: 1.0625rem;
+    }
+  }
+
+  /* --- Buttons: understated, square, hairline -------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.0625rem 2.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    line-height: 1;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: var(--color-espresso);
+    cursor: pointer;
+    transition:
+      background-color 0.5s var(--ease-silk),
+      color 0.5s var(--ease-silk),
+      border-color 0.5s var(--ease-silk),
+      opacity 0.4s var(--ease-silk);
+  }
+  .btn:hover:not(:disabled) {
+    background: var(--color-espresso);
+    color: var(--color-ivory);
+    border-color: var(--color-espresso);
+  }
+  .btn:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  .btn-solid {
+    background: var(--color-espresso);
+    color: var(--color-ivory);
+    border-color: var(--color-espresso);
+  }
+  .btn-solid:hover:not(:disabled) {
+    background: var(--color-burgundy);
+    border-color: var(--color-burgundy);
+    color: var(--color-ivory);
+  }
+
+  .btn-inverse {
+    color: var(--color-ivory);
+    border-color: color-mix(in srgb, var(--color-ivory) 45%, transparent);
+  }
+  .btn-inverse:hover:not(:disabled) {
+    background: var(--color-ivory);
+    color: var(--color-espresso);
+    border-color: var(--color-ivory);
+  }
+
+  /* --- Quiet text link with a drawn underline -------------- */
+  .link-quiet {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .link-quiet::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.55s var(--ease-silk);
+  }
+  .link-quiet:hover::after,
+  .link-quiet:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .link-drawn::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 0.35;
+  }
+  .link-drawn:hover::after {
+    opacity: 1;
+  }
+
+  /* --- Hairline rules -------------------------------------- */
+  .rule {
+    border-color: var(--rule);
+  }
+  .rule-soft {
+    border-color: var(--rule-soft);
+  }
+  .rule-inverse {
+    border-color: var(--rule-inverse);
+  }
+}
+
+@layer utilities {
+  .tracking-couture {
+    letter-spacing: var(--tracking-couture);
+  }
+  .tracking-eyebrow {
+    letter-spacing: var(--tracking-eyebrow);
+  }
+
+  /* Reveal-on-scroll, driven by IntersectionObserver. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 1.1s var(--ease-silk),
+      transform 1.1s var(--ease-silk);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Never let the animation hide content in a printed page. */
+  @media print {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}

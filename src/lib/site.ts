@@ -13,7 +13,7 @@
 export const ALLOW_INDEXING = process.env.ALLOW_INDEXING === 'true'
 
 /** The domain the brand will actually launch on. */
-const LAUNCH_URL = 'https://nesshouseofscents.com'
+const LAUNCH_URL = 'https://nesshouseofscents.tech'
 
 /**
  * Absolute base for canonical URLs and Open Graph images.
